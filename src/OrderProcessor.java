@@ -1,10 +1,10 @@
+import java.util.List;
+
 public class OrderProcessor {
+
     public void printOrderSummary(Order order) {
         // Calculate total price
-        double totalPrice = 0;
-        for (Item item : order.getItems()) {
-            totalPrice += item.getPrice() * item.getQuantity();
-        }
+        double totalPrice = calculateTotalPrice(order.getItems());
 
         // Apply discount
         if (order.getCustomer().isMember()) {
@@ -19,5 +19,14 @@ public class OrderProcessor {
             System.out.println("  - " + item.getName() + ": " + item.getQuantity() + " x $" + item.getPrice() + " = $" + (item.getQuantity() * item.getPrice()));
         }
         System.out.printf("Total Price: $%.2f%n", totalPrice);
+    }
+
+    // 🔹 Extracted method
+    private double calculateTotalPrice(List<Item> items) {
+        double totalPrice = 0;
+        for (Item item : items) {
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        return totalPrice;
     }
 }
