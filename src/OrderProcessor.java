@@ -7,7 +7,7 @@ public class OrderProcessor {
         double totalPrice = calculateTotalPrice(order.getItems());
 
         // Apply discount
-        totalPrice = applyDiscount(totalPrice, order.getCustomer().isMember());
+        totalPrice = applyDiscount(totalPrice, order.getCustomer().isPremium());
 
         // Print summary
         System.out.println("Order Summary:");
