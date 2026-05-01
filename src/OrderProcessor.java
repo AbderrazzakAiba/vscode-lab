@@ -7,9 +7,7 @@ public class OrderProcessor {
         double totalPrice = calculateTotalPrice(order.getItems());
 
         // Apply discount
-        if (order.getCustomer().isMember()) {
-            totalPrice *= 0.9; // 10% discount for members
-        }
+        totalPrice = applyDiscount(totalPrice, order.getCustomer().isMember());
 
         // Print summary
         System.out.println("Order Summary:");
@@ -21,11 +19,19 @@ public class OrderProcessor {
         System.out.printf("Total Price: $%.2f%n", totalPrice);
     }
 
-    // 🔹 Extracted method
+    // 🔹 Extracted method 1
     private double calculateTotalPrice(List<Item> items) {
         double totalPrice = 0;
         for (Item item : items) {
             totalPrice += item.getPrice() * item.getQuantity();
+        }
+        return totalPrice;
+    }
+
+    // 🔹 Extracted method 2
+    private double applyDiscount(double totalPrice, boolean isMember) {
+        if (isMember) {
+            return totalPrice * 0.9;
         }
         return totalPrice;
     }
